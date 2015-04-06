@@ -1,0 +1,10 @@
+flask==0.10.1
+flask-login
+flask-openid
+sqlalchemy==0.9.9
+flask-sqlalchemy==1.0
+sqlalchemy-migrate
+flask_whooshalchemy
+flask-wtf==0.9.5
+pytz==2015.2
+flask-babel==0.9

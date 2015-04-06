@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class="border-top">Додати питання</h3>
+<form class='form-horizontal blueForms' method="post"
+action=".">
+    <div id="div_topic" class="form-group row">
+        <label class="col-xs-1 control-label requiredField">
+            Тема
+        </label>
+        <div class="controls col-xs-4">
+            <input class="textinput textInput form-control"
+            id="topic" maxlength="50" name="topic" type="text">
+        </div>
+    </div>
+    <div id="div_description" class="form-group">
+        <label class="control-label col-xs-1 requiredField">
+            Опис
+        </label>
+        <div class="controls col-xs-4">
+            <textarea class="form-control" rows="8"></textarea>
+        </div>
+    </div>
+    <div id="form-buttons">
+        <input type="submit" name="save" value="Створити"
+        class="btn btn-primary" id="submit-id-save">
+        <a class="btn btn-default" href="/">
+            Скасувати
+        </a>
+    </div>
+</form>
+
+{% endblock %}

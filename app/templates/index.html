@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul class="nav nav-pills" id="nav-order">
+    <li role="presentation" class="active"><a href="#">Питання по даті створення</a></li>
+    <li role="presentation"><a href="#">Популярні питання</a></li>
+</ul>
+
+<div class="panel panel-default" id="questions-list">
+    <ul class="list-group">
+        <li class="list-group-item"><a href=".">Cras justo odio</a></li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Morbi leo risus</li>
+        <li class="list-group-item">Porta ac consectetur ac</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+        <li class="list-group-item">Cras justo odio</li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Morbi leo risus</li>
+        <li class="list-group-item">Porta ac consectetur ac</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+</div> <!-- /questions-list -->
+<div class="row">
+    <nav class="col-xs-12" id="nav-pagination">
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+</nav>
+</div>
+{% endblock %}

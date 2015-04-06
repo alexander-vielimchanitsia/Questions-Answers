@@ -1,0 +1,63 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Задай питання - Отримай відповідь</title>
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="../static/css/main.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+</head>
+<body>
+    <div class="container" id="container">
+        <header class="row" id="header">
+            <div class="col-xs-12" id="actions-account">
+                <ol class="breadcrumb">
+                    <li>
+                        Username
+                    </li>
+                    <li>
+                        <a href=".">Вийти</a>
+                    </li>
+                    <li>
+                        <a href=".">Увійти</a>
+                    </li>
+                    <li>
+                        <a href=".">Реєстрація</a>
+                    </li>
+                    <li class="pull-right">
+                        <a href="/question/add">Задати питання</a>
+                    </li>
+                    <li class="pull-right">
+                        <a href=".">Мої питання</a>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="col-xs-8" id="text-header">
+                <h1>Задай питання - Отримай відповідь</h1>
+            </div>
+        </header>
+
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div> <!-- /content -->
+
+        <footer>
+            <div class="col-xs-12">
+                &copy; 2015 Задай питання - Отримай відповідь
+            </div>
+        </footer>
+    </div> <!-- /container -->
+</body>
+</html>
