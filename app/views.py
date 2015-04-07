@@ -13,6 +13,10 @@ def index():
 def question_add():
     return render_template('question_add.html')
 
+@app.route('/question/review')
+def question_review():
+    return render_template('question_review.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
