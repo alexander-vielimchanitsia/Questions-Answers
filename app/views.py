@@ -1,9 +1,10 @@
 from app import app, db
-from flask import render_template, flash, redirect, request, url_for
+from flask import render_template, flash, redirect, request, url_for, session
+from flask.ext.login import login_user, logout_user, current_user, login_required
 import datetime
 
-from models import Question, Answer
-from forms import QuestionForm, AnswerForm
+from models import Question, Answer, User
+from forms import QuestionForm, AnswerForm, LoginForm, RegistrationForm
 
 
 @app.route('/')
@@ -58,3 +59,38 @@ def question_review(id):
     return render_template('question_review.html',
         question = question,
         answers = answers)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+
+        username = request.form['username']
+        password = request.form['password']
+        registered_user = User(username=username,password=password)
+        if registered_user is None:
+            flash('Username or Password is invalid' , 'error')
+            # return redirect(url_for('login'))
+
+        login_user(registered_user)
+        flash("Logged in successfully.")
+        return redirect(request.args.get("next") or url_for("index"))
+    return render_template("login.html", form=form)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        user = User(form.username.data, form.email.data,
+                    form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Thanks for registering')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))

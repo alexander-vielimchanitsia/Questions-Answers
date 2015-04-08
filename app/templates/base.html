@@ -27,19 +27,19 @@
                         Username
                     </li>
                     <li>
-                        <a href=".">Вийти</a>
-                    </li>
-                    <li>
-                        <a href=".">Увійти</a>
-                    </li>
-                    <li>
-                        <a href=".">Реєстрація</a>
+                        <a href="{{ url_for('logout') }}">Вийти</a>
                     </li>
                     <li class="pull-right">
-                        <a href="/question/add">Задати питання</a>
+                        <a href="{{ url_for('question_add') }}">Задати питання</a>
                     </li>
                     <li class="pull-right">
                         <a href=".">Мої питання</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('login') }}">Увійти</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('register') }}">Реєстрація</a>
                     </li>
                 </ol>
             </div>

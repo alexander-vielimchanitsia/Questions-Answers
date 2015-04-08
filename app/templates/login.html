@@ -1,14 +1,59 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Sign In</h1>
-<form action="" method="post" name="login">
-    {{form.hidden_tag()}}
-    <p>
-        Please enter your OpenID:<br>
-        {{form.openid(size=80)}}<br>
-    </p>
-    <p>{{form.remember_me}} Remember Me</p>
-    <p><input type="submit" value="Sign In"></p>
-</form>
+<div class="row">
+    <div class="col-lg-9 col-md-offset-3">
+        <h2 id="header-text">Авторизація</h2>
+        <!-- Login Form -->
+        {% if form.errors %}
+        <p id="login-error-massage">
+            Будь ласка, введіть правильні ім'я
+            користувача і пароль для облікового
+            запису персоналу. Зауважте, що
+            обидва поля можуть бути чутливі до
+            регістру.
+        </p>
+        {% endif %}
+        <form class='form-horizontal blueForms' method="post"
+        action="/login">
+            {{form.hidden_tag()}}
+            {% if form.errors %}
+                <ul class=errors>
+            {% for error in form.errors %}
+                    <li>{{ error }}</li>
+            {% endfor %}
+                </ul>
+            {% endif %}
+            <div id="div_id_username" class="form-group">
+                <label class="control-label col-lg-3 requiredField">
+                    {{ form.username.label }}
+                </label>
+                <div class="controls col-lg-3">
+                    <input class="textinput textInput form-control"
+                    id="id_username" maxlength="30" name="username"
+                    type="text">
+                </div>
+            </div>
+            <div id="div_id_password" class="form-group">
+                <label class="control-label col-lg-3 requiredField">
+                    {{ form.password.label }}
+                </label>
+                <div class="controls col-lg-3">
+                    <input class="textinput textInput form-control"
+                    id="id_password" maxlength="15" name="password"
+                    type="password">
+                </div>
+            </div>
+            <div id="accounts-buttons" class="buttons-form-submit">
+                <input type="submit" name="save" value="Увійти"
+                class="btn btn-primary" id="submit-id-save">
+                <a class="btn btn-default" href="/">
+                    Скасувати
+                </a>
+            </div>
+        </form>
+        <!-- Login Form -->
+    </div>
+</div>
+
 {% endblock %}
