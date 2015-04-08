@@ -3,10 +3,10 @@
 {% block content %}
 <h3 class="border-top">Додати питання</h3>
 <form class='form-horizontal blueForms' method="post"
-action=".">
+action="/question/add">
     <div id="div_topic" class="form-group row">
         <label class="col-xs-1 control-label requiredField">
-            Тема
+            {{ form.topic.label }}
         </label>
         <div class="controls col-xs-4">
             <input class="textinput textInput form-control"
@@ -15,17 +15,17 @@ action=".">
     </div>
     <div id="div_description" class="form-group">
         <label class="control-label col-xs-1 requiredField">
-            Опис
+            {{ form.text.label }}
         </label>
         <div class="controls col-xs-4">
-            <textarea class="form-control" rows="8"></textarea>
+            <textarea class="form-control" rows="8" name="text"></textarea>
         </div>
     </div>
     <div id="form-buttons">
-        <input type="submit" name="save" value="Створити"
+        <input type="submit" name="save" value="Save"
         class="btn btn-primary" id="submit-id-save">
         <a class="btn btn-default" href="/">
-            Скасувати
+            Cancel
         </a>
     </div>
 </form>

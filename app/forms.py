@@ -1,8 +1,19 @@
+# from flask.ext.wtf import Form
 from flask.ext.wtf import Form
-from wtforms import TextField, BooleanField
-from wtforms.validators import Required
+from wtforms.fields import TextField, StringField, PasswordField, BooleanField
+from wtforms import validators, ValidationError
 
 
-class LoginForm(Form):
-    openid = TextField('openid', validators = [Required()])
-    remember_me = BooleanField('remember_me', default = False)
+class QuestionForm(Form):
+    topic = StringField('Topic',
+        validators=[validators.required(),
+        validators.length(min=5, max=50)])
+
+    text = StringField('Text',
+        validators=[validators.required(),
+        validators.length(min=15, max=255)])
+
+class AnswerForm(Form):
+    text = StringField('Text',
+        validators=[validators.required(),
+        validators.length(min=3, max=255)])
