@@ -14,9 +14,10 @@
         {% endfor %}
     </ul>
 </div> <!-- /questions-list -->
-{% if not questions %}
+{% if not questions.items %}
 <h2>Запитань поки немає.</h2>
 {% endif %}
+{% if questions.pages != 0 %}
 <div class="row">
     <nav class="col-xs-12" id="nav-pagination">
         <ul class="pagination">
@@ -26,13 +27,11 @@
                 </a>
             </li>
             {% for page in questions.iter_pages() %}
-                {% if page %}
-                    <li>
-                        <a href="{{ url_for('index') }}/page/{{ page }}">
-                            {{ page }}
-                        </a>
-                    </li>
-                {% endif %}
+            <li>
+                <a href="{{ url_for('index') }}/page/{{ page }}">
+                    {{ page }}
+                </a>
+            </li>
             {% endfor %}
             <li>
                 <a href="{{ url_for('index', page = questions.pages) }}" aria-label="Next">
@@ -40,6 +39,7 @@
                 </a>
             </li>
         </ul>
-</nav>
+    </nav>
 </div>
+{% endif %}
 {% endblock %}
