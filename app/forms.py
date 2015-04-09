@@ -7,7 +7,7 @@ from models import User
 
 
 class QuestionForm(Form):
-    title = StringField('Topic',
+    title = StringField('Title',
         validators=[validators.Required(),
         validators.length(min=5, max=50)])
 

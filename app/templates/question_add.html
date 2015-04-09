@@ -16,12 +16,12 @@ action="">
     {{form.hidden_tag()}}
     <div id="div_topic" class="form-group row">
         <label class="col-xs-1 control-label requiredField">
-            {{ form.topic.label }}
+            {{ form.title.label }}
         </label>
         <div class="controls col-xs-4">
             <input class="textinput textInput form-control"
-            id="topic" maxlength="50" value="{{ request.form['topic'] }}"
-            name="topic" type="text">
+            id="title" maxlength="50" value="{{ request.form['title'] }}"
+            name="title" type="text">
         </div>
     </div>
     <div id="div_description" class="form-group">
