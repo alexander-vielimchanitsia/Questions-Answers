@@ -23,7 +23,7 @@ action="/register">
         <div class="controls col-lg-3">
             <input class="textinput textInput form-control"
             id="id_username" maxlength="30" name="username"
-            type="text" requariment>
+            type="text" value="{{ request.form['username'] }}" requariment>
         </div>
     </div>
     <div id="div_id_email" class="form-group">
@@ -33,7 +33,7 @@ action="/register">
         <div class="controls col-lg-3">
             <input class="textinput textInput form-control"
             id="id_email" maxlength="30" name="email"
-            type="text" requariment>
+            type="text" value="{{ request.form['email'] }}" requariment>
         </div>
     </div>
     <div id="div_id_password" class="form-group">
