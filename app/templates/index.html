@@ -2,35 +2,40 @@
 
 {% block content %}
 <ul class="nav nav-pills" id="nav-order">
-    <li role="presentation" class="active"><a href="#">Питання по даті створення</a></li>
-    <li role="presentation"><a href="#">Популярні питання</a></li>
+    <li role="presentation" class="active"><a href="{{ url_for('index') }}">All questions</a></li>
 </ul>
 
 <div class="panel panel-default" id="questions-list">
     <ul class="list-group">
-        {% for question in questions %}
+        {% for question in questions.items %}
         <li class="list-group-item">
-            <a href="/question/{{ question.id }}/review">{{ question.topic }}</a>
-            <span class="badge">14</span>
+            <a href="/question/{{ question.id }}/review">{{ question.title }}</a>
         </li>
         {% endfor %}
     </ul>
 </div> <!-- /questions-list -->
+{% if not questions %}
+<h2>Запитань поки немає.</h2>
+{% endif %}
 <div class="row">
     <nav class="col-xs-12" id="nav-pagination">
         <ul class="pagination">
             <li>
-                <a href="#" aria-label="Previous">
+                <a href="{{ url_for('index') }}/page/1" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
+            {% for page in questions.iter_pages() %}
+                {% if page %}
+                    <li>
+                        <a href="{{ url_for('index') }}/page/{{ page }}">
+                            {{ page }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
             <li>
-                <a href="#" aria-label="Next">
+                <a href="{{ url_for('index', page = questions.pages) }}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

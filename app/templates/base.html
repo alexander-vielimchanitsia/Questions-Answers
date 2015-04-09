@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Задай питання - Отримай відповідь</title>
+    <title>Ask a question - Get answers</title>
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
@@ -14,7 +14,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
     <!-- My CSS -->
-    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
     </script>
 </head>
@@ -27,25 +27,28 @@
                         Username
                     </li>
                     <li>
-                        <a href="{{ url_for('logout') }}">Вийти</a>
+                        <a href="{{ url_for('logout') }}">Log Out</a>
                     </li>
                     <li class="pull-right">
-                        <a href="{{ url_for('question_add') }}">Задати питання</a>
+                        <a href="{{ url_for('question_add') }}">Ask question</a>
                     </li>
                     <li class="pull-right">
-                        <a href=".">Мої питання</a>
+                        <a href=".">My questions</a>
+                    </li>
+                    <li class="pull-right">
+                        <a href="{{ url_for('index') }}">Home</a>
                     </li>
                     <li>
-                        <a href="{{ url_for('login') }}">Увійти</a>
+                        <a href="{{ url_for('login') }}">Log In</a>
                     </li>
                     <li>
-                        <a href="{{ url_for('register') }}">Реєстрація</a>
+                        <a href="{{ url_for('register') }}">Sing Up</a>
                     </li>
                 </ol>
             </div>
 
             <div class="col-xs-8" id="text-header">
-                <h1>Задай питання - Отримай відповідь</h1>
+                <h1>Ask a question - Get answers</h1>
             </div>
         </header>
 
@@ -55,7 +58,7 @@
 
         <footer>
             <div class="col-xs-12">
-                &copy; 2015 Задай питання - Отримай відповідь
+                &copy; 2015 Ask a question - Get answers
             </div>
         </footer>
     </div> <!-- /container -->

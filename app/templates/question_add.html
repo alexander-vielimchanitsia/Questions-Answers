@@ -1,16 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3 class="border-top">Додати питання</h3>
+<h3 class="border-top">Question add</h3>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 <form class='form-horizontal blueForms' method="post"
-action="/question/add">
+action="">
+    {{form.hidden_tag()}}
     <div id="div_topic" class="form-group row">
         <label class="col-xs-1 control-label requiredField">
             {{ form.topic.label }}
         </label>
         <div class="controls col-xs-4">
             <input class="textinput textInput form-control"
-            id="topic" maxlength="50" name="topic" type="text">
+            id="topic" maxlength="50" value="{{ request.form['topic'] }}"
+            name="topic" type="text">
         </div>
     </div>
     <div id="div_description" class="form-group">
@@ -18,7 +29,7 @@ action="/question/add">
             {{ form.text.label }}
         </label>
         <div class="controls col-xs-4">
-            <textarea class="form-control" rows="8" name="text"></textarea>
+            <textarea class="form-control" rows="8" name="text">{{ request.form['text'] }}</textarea>
         </div>
     </div>
     <div id="form-buttons">

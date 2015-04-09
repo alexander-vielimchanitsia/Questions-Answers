@@ -3,17 +3,8 @@
 {% block content %}
 <div class="row">
     <div class="col-lg-9 col-md-offset-3">
-        <h2 id="header-text">Авторизація</h2>
+        <h2 id="header-text">Log In</h2>
         <!-- Login Form -->
-        {% if form.errors %}
-        <p id="login-error-massage">
-            Будь ласка, введіть правильні ім'я
-            користувача і пароль для облікового
-            запису персоналу. Зауважте, що
-            обидва поля можуть бути чутливі до
-            регістру.
-        </p>
-        {% endif %}
         <form class='form-horizontal blueForms' method="post"
         action="/login">
             {{form.hidden_tag()}}

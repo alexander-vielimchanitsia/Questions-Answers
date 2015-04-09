@@ -9,3 +9,5 @@ SECRET_KEY = 'S5BvUsteq6ltYf05R32hfh2C29YE9W1L'
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
+
+POSTS_PER_PAGE = 3

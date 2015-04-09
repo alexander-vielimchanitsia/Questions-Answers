@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3 class="border-top">{{ question.topic }}</h3>
+<h3 class="border-top">{{ question.title }}</h3>
 <div class="panel panel-primary">
     <div class="panel-heading">
         Велимчаниця Олександр
@@ -10,13 +10,18 @@
         {{ question.text }}
     </div>
 </div>
-<h3 class="border-top">Відповіді</h3>
+<h3 class="border-top">Answers</h3>
 {% for answer in answers %}
 <div class="panel panel-default">
     <div class="panel-heading">
         Іван Іванов
-        <span class="glyphicon glyphicon-thumbs-up pull-right" aria-hidden="true"></span>
-        <span class="badge pull-right" id="score-likes">2314</span>
+        <a href="{{ url_for('dislike', id=question.id, answer_id=answer.id )}}">
+            <span class="glyphicon glyphicon-thumbs-down pull-right" id="answer-dislike" aria-hidden="true"></span>
+        </a>
+        <a href="{{ url_for('like', id=question.id, answer_id=answer.id )}}">
+            <span class="glyphicon glyphicon-thumbs-up pull-right" id="answer-like" aria-hidden="true"></span>
+        </a>
+        <span class="badge pull-right" id="score-likes">{{ answer.rating }}</span>
     </div>
     <div class="panel-body">
         {{ answer.text }}
@@ -24,21 +29,31 @@
 </div>
 {% endfor %}
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 <form class='form-horizontal blueForms border-top' method="post"
-action="/question/{{ question.id }}/review">
+action="">
+    {{form.hidden_tag()}}
     <div id="div_description" class="form-group">
         <label class="control-label col-xs-1 requiredField">
-            Дати відповідь
+            {{ form.text.label }}
         </label>
         <div class="controls col-xs-4">
-            <textarea class="form-control" rows="8" name="text"></textarea>
+            <textarea class="form-control" rows="8" name="text">{{ request.form['text'] }}</textarea>
         </div>
     </div>
     <div id="form-buttons">
-        <input type="submit" name="save" value="Написати"
+        <input type="submit" name="save" value="Send"
         class="btn btn-primary" id="submit-id-save">
-        <a class="btn btn-default" href="/">
-            На головну
+        <a class="btn btn-default" href="{{ url_for('index')}}">
+            Home
         </a>
     </div>
 </form>

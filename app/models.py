@@ -33,7 +33,7 @@ class User(db.Model):
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    topic = db.Column(db.String(50))
+    title = db.Column(db.String(50))
     text = db.Column(db.String(255))
     date = db.Column(db.DateTime)
     views = db.Column(db.Integer)
@@ -41,7 +41,7 @@ class Question(db.Model):
         lazy='dynamic')
 
     def __repr__(self):
-        return '<Question %r>' % (self.topic)
+        return '<Question %r>' % (self.title)
 
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key = True)

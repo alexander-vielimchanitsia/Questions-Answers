@@ -7,18 +7,18 @@ from models import User
 
 
 class QuestionForm(Form):
-    topic = StringField('Topic',
-        validators=[validators.required(),
+    title = StringField('Topic',
+        validators=[validators.Required(),
         validators.length(min=5, max=50)])
 
     text = StringField('Text',
-        validators=[validators.required(),
-        validators.length(min=15, max=255)])
+        validators=[validators.Required(),
+        validators.length(min=15, max=500)])
 
 class AnswerForm(Form):
     text = StringField('Text',
-        validators=[validators.required(),
-        validators.length(min=3, max=255)])
+        validators=[validators.Required(),
+        validators.length(min=3, max=500)])
 
 class LoginForm(Form):
     username = TextField('Username', [validators.Required()])
@@ -39,9 +39,9 @@ class LoginForm(Form):
             self.username.errors.append('Unknown username')
             return False
 
-        # if not user.check_password(self.password.data):
-        #     self.password.errors.append('Invalid password')
-        #     return False
+        if not user.check_password(self.password.data):
+            self.password.errors.append('Invalid password')
+            return False
 
         self.user = user
         return True
