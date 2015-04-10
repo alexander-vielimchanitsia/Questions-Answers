@@ -9,7 +9,7 @@
     <ul class="list-group">
         {% for question in questions.items %}
         <li class="list-group-item">
-            <a href="/question/{{ question.id }}/review">{{ question.title }}</a>
+            <a href="{{ url_for('question_review', id=question.id) }}">{{ question.title }}</a>
         </li>
         {% endfor %}
     </ul>
