@@ -23,8 +23,9 @@
         <header class="row" id="header">
             <div class="col-xs-12" id="actions-account">
                 <ol class="breadcrumb">
+                    {% if current_user.is_authenticated() %}
                     <li>
-                        Username
+                        {{ current_user.username }}
                     </li>
                     <li>
                         <a href="{{ url_for('logout') }}">Log Out</a>
@@ -35,14 +36,16 @@
                     <li class="pull-right">
                         <a href=".">My questions</a>
                     </li>
-                    <li class="pull-right">
-                        <a href="{{ url_for('index') }}">Home</a>
-                    </li>
+                    {% else %}
                     <li>
                         <a href="{{ url_for('login') }}">Log In</a>
                     </li>
                     <li>
                         <a href="{{ url_for('register') }}">Sing Up</a>
+                    </li>
+                    {% endif %}
+                    <li class="pull-right">
+                        <a href="{{ url_for('index') }}">Home</a>
                     </li>
                 </ol>
             </div>

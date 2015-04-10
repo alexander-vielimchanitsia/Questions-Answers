@@ -9,25 +9,31 @@ class User(db.Model):
     password = db.Column('password' , db.String(10))
     email = db.Column('email',db.String(50),unique=True , index=True)
     registered_on = db.Column('registered_on' , db.DateTime)
- 
+
     def __init__(self , username ,password , email):
         self.username = username
         self.password = password
         self.email = email
         self.registered_on = datetime.utcnow()
- 
+
+    def check_password(self, password):
+        if password == self.password:
+            return True
+        else:
+            return False
+
     def is_authenticated(self):
         return True
- 
+
     def is_active(self):
         return True
- 
+
     def is_anonymous(self):
         return False
- 
+
     def get_id(self):
         return unicode(self.id)
- 
+
     def __repr__(self):
         return '<User %r>' % (self.username)
 
@@ -37,6 +43,7 @@ class Question(db.Model):
     text = db.Column(db.String(255))
     date = db.Column(db.DateTime)
     views = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     answers = db.relationship('Answer', backref='question',
         lazy='dynamic')
 
@@ -49,6 +56,7 @@ class Answer(db.Model):
     date = db.Column(db.DateTime)
     rating = db.Column(db.Integer, default=0)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Answer %r>' % (self.text)

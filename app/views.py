@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from app import app, db
+from app import app, db, login_manager
 from flask import render_template, flash, redirect, request, url_for, session
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from datetime import datetime
@@ -11,6 +11,10 @@ from config import POSTS_PER_PAGE
 from models import Question, Answer, User
 from forms import QuestionForm, AnswerForm, LoginForm, RegistrationForm
 
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.query.get(userid)
 
 # flash_errors for show all errors in a forms
 def flash_errors(form):
@@ -96,11 +100,12 @@ def question_review(id):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    if form.validate_on_submit():
 
+    if form.validate_on_submit():
         username = request.form['username']
         password = request.form['password']
-        registered_user = User(username=username,password=password)
+        registered_user = User.query.filter_by(username=username,password=password).first()
+
         if registered_user is None:
             flash('Username or Password is invalid' , 'error')
             # return redirect(url_for('login'))
@@ -115,8 +120,8 @@ def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST':
         if form.validate_on_submit():
-            user = User(form.username.data, form.email.data,
-                        form.password.data)
+            user = User(form.username.data, form.password.data,
+                        form.email.data)
             db.session.add(user)
             db.session.commit()
             flash('Thanks for registering')
