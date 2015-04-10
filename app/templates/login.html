@@ -1,50 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row">
-    <div class="col-lg-9 col-md-offset-3">
-        <h2 id="header-text">Log In</h2>
-        <!-- Login Form -->
-        <form class='form-horizontal blueForms' method="post"
-        action="/login">
-            {{form.hidden_tag()}}
-            {% if form.errors %}
-                <ul class=errors>
-            {% for error in form.errors %}
-                    <li>{{ error }}</li>
+<h2 class="border-top" id="header-text">Log In</h2>
+<!-- Login Form -->
+<form class='form-horizontal blueForms' method="post"
+action="/login">
+    {{form.hidden_tag()}}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
             {% endfor %}
-                </ul>
-            {% endif %}
-            <div id="div_id_username" class="form-group">
-                <label class="control-label col-lg-3 requiredField">
-                    {{ form.username.label }}
-                </label>
-                <div class="controls col-lg-3">
-                    <input class="textinput textInput form-control"
-                    id="id_username" maxlength="30" name="username"
-                    type="text">
-                </div>
-            </div>
-            <div id="div_id_password" class="form-group">
-                <label class="control-label col-lg-3 requiredField">
-                    {{ form.password.label }}
-                </label>
-                <div class="controls col-lg-3">
-                    <input class="textinput textInput form-control"
-                    id="id_password" maxlength="15" name="password"
-                    type="password">
-                </div>
-            </div>
-            <div id="accounts-buttons" class="buttons-form-submit">
-                <input type="submit" name="save" value="Увійти"
-                class="btn btn-primary" id="submit-id-save">
-                <a class="btn btn-default" href="/">
-                    Скасувати
-                </a>
-            </div>
-        </form>
-        <!-- Login Form -->
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <div id="div_id_username" class="form-group">
+        <label class="control-label col-lg-3 requiredField">
+            {{ form.username.label }}
+        </label>
+        <div class="controls col-lg-3">
+            <input class="textinput textInput form-control"
+            id="id_username" maxlength="30" name="username"
+            type="text">
+        </div>
     </div>
-</div>
-
+    <div id="div_id_password" class="form-group">
+        <label class="control-label col-lg-3 requiredField">
+            {{ form.password.label }}
+        </label>
+        <div class="controls col-lg-3">
+            <input class="textinput textInput form-control"
+            id="id_password" maxlength="15" name="password"
+            type="password">
+        </div>
+    </div>
+    <div id="log-in-buttons" class="buttons-form-submit">
+        <input type="submit" name="save" value="Log In"
+        class="btn btn-primary" id="submit-id-save">
+        <a class="btn btn-default" href="{{ url_for('index') }}">
+            Cancel
+        </a>
+    </div>
+</form>
 {% endblock %}
