@@ -43,9 +43,7 @@ class Question(db.Model):
     text = db.Column(db.String(255))
     date = db.Column(db.DateTime)
     views = db.Column(db.Integer)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    answers = db.relationship('Answer', backref='question',
-        lazy='dynamic')
+    user_id = db.Column(db.Integer)
 
     def __repr__(self):
         return '<Question %r>' % (self.title)
@@ -56,7 +54,7 @@ class Answer(db.Model):
     date = db.Column(db.DateTime)
     rating = db.Column(db.Integer, default=0)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer)
 
     def __repr__(self):
         return '<Answer %r>' % (self.text)

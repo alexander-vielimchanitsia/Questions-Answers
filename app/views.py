@@ -40,11 +40,11 @@ def question_add():
     if request.method == 'POST':
         form = QuestionForm(request.form)
         if form.validate_on_submit():
-
             question = Question(
-                title = request.form['title'],
-                text = request.form['text'],
-                date = datetime.now())
+                title=request.form['title'],
+                text=request.form['text'],
+                date=datetime.now(),
+                user_id=current_user.id)
 
             # Answer save in db
             db.session.add(question)
@@ -69,15 +69,20 @@ def question_review(id):
     # All answers in this question
     answers = Answer.query.filter_by(question_id=id)
 
+    author_question = User.query.get(question.user_id)
+
+    # author_answer = User.query.get(answers.user_id)
+
     # was form posted?
     if request.method == 'POST':
         form = AnswerForm(request.form)
 
         if form.validate_on_submit():
             answer = Answer(
-                text = request.form['text'],
-                date = datetime.now(),
-                question_id = id)
+                text=request.form['text'],
+                date=datetime.now(),
+                question_id=id,
+                user_id=current_user.id)
 
             # Answer save in db
             db.session.add(answer)
@@ -95,7 +100,9 @@ def question_review(id):
     return render_template('question_review.html',
         form = form,
         question = question,
-        answers = answers)
+        answers = answers,
+        author_question=author_question,
+        users = User)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -104,7 +111,12 @@ def login():
     if form.validate_on_submit():
         username = request.form['username']
         password = request.form['password']
-        registered_user = User.query.filter_by(username=username,password=password).first()
+        registered_user = User.query.filter_by(username=username,
+            password=password).first()
+
+        if registered_user is None:
+            flash('Username or Password is invalid' , 'error')
+            # return redirect(url_for('login'))
 
         login_user(registered_user)
 

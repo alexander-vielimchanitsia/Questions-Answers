@@ -4,7 +4,7 @@
 <h3 class="border-top">{{ question.title }}</h3>
 <div class="panel panel-primary">
     <div class="panel-heading">
-        Велимчаниця Олександр
+        {{ author_question.username }}
     </div>
     <div class="panel-footer">
         {{ question.text }}
@@ -14,13 +14,15 @@
 {% for answer in answers %}
 <div class="panel panel-default">
     <div class="panel-heading">
-        Іван Іванов
+        {{ users.query.get(answer.user_id).username }}
+        {% if current_user.is_authenticated() %}
         <a href="{{ url_for('dislike', id=question.id, answer_id=answer.id )}}">
             <span class="glyphicon glyphicon-thumbs-down pull-right" id="answer-dislike" aria-hidden="true"></span>
         </a>
         <a href="{{ url_for('like', id=question.id, answer_id=answer.id )}}">
             <span class="glyphicon glyphicon-thumbs-up pull-right" id="answer-like" aria-hidden="true"></span>
         </a>
+        {% endif %}
         <span class="badge pull-right" id="score-likes">{{ answer.rating }}</span>
     </div>
     <div class="panel-body">
@@ -38,6 +40,7 @@
     </ul>
   {% endif %}
 {% endwith %}
+{% if current_user.is_authenticated() %}
 <form class='form-horizontal blueForms border-top' method="post"
 action="">
     {{form.hidden_tag()}}
@@ -57,5 +60,6 @@ action="">
         </a>
     </div>
 </form>
+{% endif %}
 
 {% endblock %}
