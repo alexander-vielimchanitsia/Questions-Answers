@@ -3,18 +3,18 @@
 {% block content %}
 <h3 class="border-top">Question add</h3>
 {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
+    {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
 {% endwith %}
 <form class='form-horizontal blueForms' method="post"
 action="">
     {{form.hidden_tag()}}
-    <div id="div_topic" class="form-group row">
+    <div id="div_title" class="form-group row">
         <label class="col-xs-1 control-label requiredField">
             {{ form.title.label }}
         </label>
