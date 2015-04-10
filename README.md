@@ -1,7 +1,6 @@
 # Questions-Answers
-Questions-Answers
 
-# On Heroku: http://project-questions-answers.herokuapp.com/
+### On Heroku: http://project-questions-answers.herokuapp.com/
 
 Project install:
 git clone git://github.com/alexander-vielimchanitsia/Questions-Answers.git
