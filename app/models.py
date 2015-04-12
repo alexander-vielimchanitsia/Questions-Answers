@@ -4,11 +4,14 @@ from datetime import datetime
 
 class User(db.Model):
     __tablename__ = "users"
+
     id = db.Column('user_id',db.Integer , primary_key=True)
     username = db.Column('username', db.String(20), unique=True , index=True)
     password = db.Column('password' , db.String(10))
     email = db.Column('email',db.String(50),unique=True , index=True)
     registered_on = db.Column('registered_on' , db.DateTime)
+    questions = db.relationship('Question', backref=db.backref('Author', lazy='joined'), lazy='dynamic')
+    answers = db.relationship('Answer', backref=db.backref('Author', lazy='joined'), lazy='dynamic')
 
     def __init__(self , username ,password , email):
         self.username = username
@@ -38,23 +41,27 @@ class User(db.Model):
         return '<User %r>' % (self.username)
 
 class Question(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
+    __tablename__ = 'question'
+
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50))
     text = db.Column(db.String(255))
     date = db.Column(db.DateTime)
     views = db.Column(db.Integer)
-    user_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
     def __repr__(self):
         return '<Question %r>' % (self.title)
 
 class Answer(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
+    __tablename__ = 'answer'
+
+    id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255))
     date = db.Column(db.DateTime)
     rating = db.Column(db.Integer, default=0)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
-    user_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
     def __repr__(self):
         return '<Answer %r>' % (self.text)
